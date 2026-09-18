@@ -20,16 +20,21 @@
             position: relative;
             min-height: 100vh;
         }
-        /* خلفية شبكة الإضاءة الحمراء الفخمة */
+        /* خلفية شبكة الإضاءة الحمراء المتحركة الفخمة */
         .bg-grid {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: radial-gradient(circle, rgba(255, 30, 30, 0.18) 1.5px, transparent 1.5px);
-            background-size: 35px 35px;
+            background-image: radial-gradient(circle, rgba(255, 30, 30, 0.25) 1.5px, transparent 1.5px);
+            background-size: 30px 30px;
             z-index: -1;
+            animation: gridMove 20s linear infinite;
+        }
+        @keyframes gridMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 30px 30px; }
         }
         header {
             display: flex;
@@ -74,6 +79,7 @@
             color: #00ff66;
             font-weight: bold;
             display: none;
+            margin-left: 10px;
         }
         .hero {
             text-align: center;
@@ -135,6 +141,7 @@
             color: #888;
         }
 
+        /* صندوق تحويل إنستا باي */
         .transfer-box {
             background: #141414;
             border: 1px solid #ff1e1e;
@@ -143,13 +150,14 @@
             padding: 15px;
             border-radius: 12px;
             text-align: center;
-            box-shadow: 0 0 15px rgba(255, 30, 30, 0.1);
+            box-shadow: 0 0 15px rgba(255, 30, 30, 0.15);
         }
         .transfer-number {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 900;
             color: #ff1e1e;
             margin: 8px 0;
+            direction: ltr;
         }
         .section-title {
             text-align: center;
@@ -291,7 +299,7 @@
             font-size: 13px;
         }
         
-        /* لوحة الإدارة المنظمة جداً */
+        /* لوحة الإدارة */
         .admin-trigger {
             position: fixed;
             bottom: 15px;
@@ -331,7 +339,7 @@
         <div class="logo">JOKS STORE</div>
         <div class="nav-links">
             <span onclick="scrollToGames()">الألعاب</span>
-            <span onclick="alert('JOKS STORE - المتجر المعتمد لشحن الألعاب بسرعة وأمان تام في مصر.')">عن المتجر</span>
+            <span onclick="alert('JOKS STORE - المتجر المعتمد لشحن الألعاب بسرعة وأمان تام عبر InstaPay.')">عن المتجر</span>
         </div>
         <div>
             <span id="user-status-text" class="user-status"></span>
@@ -364,10 +372,11 @@
         </div>
     </div>
 
+    <!-- صندوق التحويل عبر إنستا باي -->
     <div class="transfer-box">
-        <p>💳 حول المبلغ المطلوب إلى رقم فودافون كاش الرسمي:</p>
-        <div class="transfer-number">01001477719</div>
-        <p style="font-size: 11px; color: #aaa;">لا يمكن إتمام الطلب إلا بعد تسجيل الدخول وتحويل المبلغ.</p>
+        <p>💳 حول المبلغ المطلوب عبر تطبيق إنستا باي (InstaPay) إلى الحساب الآتي:</p>
+        <div class="transfer-number">youssef@instapay</div>
+        <p style="font-size: 11px; color: #aaa;">يجب تسجيل الدخول أولاً وإتمام التحويل لتأكيد الطلب.</p>
     </div>
 
     <div class="section-title" id="games-section">الألعاب المتاحة للشحن</div>
@@ -410,7 +419,7 @@
         </div>
     </div>
 
-    <!-- نافذة عرض الباقات الشاملة -->
+    <!-- نافذة عرض الباقات -->
     <div id="packages-modal" class="modal">
         <div class="modal-content">
             <h3 id="modal-game-title" style="color: #ff1e1e; margin-bottom: 15px;"></h3>
@@ -422,7 +431,7 @@
     <!-- نافذة إتمام الطلب والدفع -->
     <div id="checkout-modal" class="modal">
         <div class="modal-content">
-            <h3 style="color: #ff1e1e; margin-bottom: 10px;">تأكيد الطلب</h3>
+            <h3 style="color: #ff1e1e; margin-bottom: 10px;">تأكيد الطلب عبر InstaPay</h3>
             <div id="checkout-info" style="font-size: 13px; color: #ccc; margin-bottom: 15px;"></div>
             
             <div class="form-group">
@@ -434,12 +443,12 @@
                 <input type="text" id="user-phone" placeholder="01xxxxxxxx0">
             </div>
             <div class="form-group">
-                <label>الرقم المحول منه (فودافون كاش):</label>
-                <input type="text" id="sender-phone" placeholder="الرقم اللي حوّلت منه">
+                <label>اسم الحساب المحول منه (إنستا باي):</label>
+                <input type="text" id="sender-account" placeholder="اسم صاحب الحساب أو المعرف">
             </div>
             <div style="background: #1f1f1f; padding: 10px; border-radius: 8px; margin-bottom: 12px; font-size: 13px;">
                 المبلغ المطلـوب: <span id="pkg-price-text" style="color: #ff1e1e; font-weight: bold;"></span>
-                <div style="font-size: 11px; color: #aaa; margin-top: 3px;">حول إلى رقم: <b>01001477719</b></div>
+                <div style="font-size: 11px; color: #aaa; margin-top: 3px;">التحويل على عنوان InstaPay: <b>youssef@instapay</b></div>
             </div>
 
             <button class="submit-order-btn" onclick="submitOrder()">إرسال الطلب للمراجعة 🚀</button>
@@ -447,7 +456,7 @@
         </div>
     </div>
 
-    <!-- نافذة تسجيل الدخول (إجبارية) -->
+    <!-- نافذة تسجيل الدخول الإجبارية -->
     <div id="login-modal" class="modal">
         <div class="modal-content">
             <h3 style="color: #ff1e1e; margin-bottom: 15px;">تسجيل الدخول للمتجر</h3>
@@ -465,13 +474,13 @@
         </div>
     </div>
 
-    <!-- لوحة الإدارة المخفية (كلمة المرور 1234) -->
+    <!-- لوحة الإدارة (كلمة المرور 1234) -->
     <button class="admin-trigger" onclick="openAdminPanel()"><i class="fa-solid fa-lock"></i> لوحة الإدارة</button>
 
     <div id="admin-modal" class="modal">
         <div class="modal-content" style="max-width: 520px;">
             <h3 style="color: #ff1e1e; margin-bottom: 5px;">لوحة تحكم الطلبات</h3>
-            <p style="font-size: 11px; color: #888; margin-bottom: 15px;">الطلبات الواردة من العملاء مع تفاصيل التحويل والـ ID</p>
+            <p style="font-size: 11px; color: #888; margin-bottom: 15px;">الطلبات الواردة من العملاء عبر InstaPay</p>
             <div id="admin-orders-list" style="text-align: right; max-height: 320px; overflow-y: auto;"></div>
             <button class="close-modal" onclick="closeModal('admin-modal')">إغلاق لوحة الإدارة</button>
         </div>
@@ -488,7 +497,6 @@
         let currentSelectedPackage = "";
         let currentSelectedPrice = "";
 
-        // باقات الألعاب كاملة
         const gamePackages = {
             "Free Fire": [
                 {name: "50 جوهرة", price: "25.00 جنيه"},
@@ -519,38 +527,32 @@
         };
 
         function scrollToGames() {
-            let el = document.getElementById('games-section');
-            if(el) el.scrollIntoView({behavior: 'smooth'});
+            document.getElementById('games-section').scrollIntoView({behavior: 'smooth'});
         }
 
         function openLoginModal() {
-            let modal = document.getElementById('login-modal');
-            if(modal) modal.style.display = 'flex';
+            document.getElementById('login-modal').style.display = 'flex';
         }
 
         function performLogin() {
-            let nameInput = document.getElementById('login-name');
-            let phoneInput = document.getElementById('login-phone');
+            let name = document.getElementById('login-name').value.trim();
+            let phone = document.getElementById('login-phone').value.trim();
             
-            if(!nameInput || !phoneInput || !nameInput.value.trim() || !phoneInput.value.trim()) {
+            if(!name || !phone) {
                 alert("من فضلك اكتب الاسم ورقم الموبايل لتسجيل الدخول!");
                 return;
             }
 
             isLogedIn = true;
-            loggedUserName = nameInput.value.trim();
+            loggedUserName = name;
             
-            let authBtn = document.getElementById('auth-btn');
-            if(authBtn) authBtn.style.display = 'none';
-
+            document.getElementById('auth-btn').style.display = 'none';
             let statusText = document.getElementById('user-status-text');
-            if(statusText) {
-                statusText.style.display = 'inline-block';
-                statusText.innerHTML = `مرحباً، ${loggedUserName} ✓`;
-            }
+            statusText.style.display = 'inline-block';
+            statusText.innerHTML = `مرحباً، ${name} ✓`;
 
-            closeModal('login-modal');
-            alert("تم تسجيل الدخول بنجاح! يمكنك الآن اختيار الباقات وشحن ألعابك.");
+            document.getElementById('login-modal').style.display = 'none';
+            alert("تم تسجيل الدخول بنجاح! يمكنك الآن تصفح الباقات وشحن ألعابك.");
         }
 
         function openPackages(gameName) {
@@ -561,18 +563,14 @@
             }
 
             currentSelectedGame = gameName;
-            let titleEl = document.getElementById('modal-game-title');
-            if(titleEl) titleEl.innerText = "باقات " + gameName;
+            document.getElementById('modal-game-title').innerText = "باقات " + gameName;
             
             let listDiv = document.getElementById('packages-list');
-            if(!listDiv) return;
-            
             listDiv.innerHTML = "";
             
-            if(gamePackages[gameName]) {
-                gamePackages[gameName].forEach(pkg => {
-                    listDiv.innerHTML += `
-                        <div class="package-item">
-                            <div>
-                                <div style="font-weight:700; font-size:14px;">${pkg.name}</div>
-                                <div style="colo
+            gamePackages[gameName].forEach(pkg => {
+                listDiv.innerHTML += `
+                    <div class="package-item">
+                        <div>
+                            <div style="font-weight:700; font-size:14px;">${pkg.name}</div>
+                            <div style="color:#ff1e1e; font-size:13px; font-weight 
