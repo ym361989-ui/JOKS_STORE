@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Joks Store - المتجر الرسمى لشحن الألعاب</title>
+    <title>Joks Store - المتجر الرسمي لشحن الألعاب</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -18,7 +18,7 @@
             color: #ffffff;
             padding-bottom: 50px;
         }
-        /* شاشة تسجيل الدخول */
+        /* شاشة تسجيل الدخول برقم الهاتف والبريد */
         #login-screen {
             position: fixed;
             top: 0;
@@ -44,8 +44,13 @@
         }
         .login-box h2 {
             color: #ff3333;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             font-size: 1.8rem;
+        }
+        .login-box p {
+            color: #999;
+            font-size: 0.85rem;
+            margin-bottom: 20px;
         }
         .login-box input {
             width: 100%;
@@ -76,7 +81,7 @@
             transform: scale(1.02);
         }
 
-        /* المحتوى الرئيسي للمتجر */
+        /* التطبيق الرئيسي */
         #main-app {
             display: none;
         }
@@ -99,7 +104,7 @@
             font-size: 0.95rem;
         }
         .container {
-            max-width: 600px;
+            max-width: 650px;
             margin: 20px auto;
             padding: 0 15px;
         }
@@ -110,10 +115,12 @@
             border-right: 4px solid #ff0000;
             padding-right: 10px;
         }
+        
+        /* كارت اللعبة مع الصورة */
         .game-card {
             background: linear-gradient(145deg, #120404, #1a0606);
             border-radius: 14px;
-            padding: 20px;
+            padding: 15px 20px;
             margin-bottom: 15px;
             border: 1px solid #3d0d0d;
             box-shadow: 0 5px 15px rgba(0,0,0,0.5);
@@ -134,9 +141,12 @@
             align-items: center;
             gap: 15px;
         }
-        .game-info i {
-            font-size: 2rem;
-            color: #ff1a1a;
+        .game-img {
+            width: 55px;
+            height: 55px;
+            border-radius: 12px;
+            object-fit: cover;
+            border: 2px solid #ff0000;
         }
         .game-name {
             font-size: 1.2rem;
@@ -147,7 +157,7 @@
             color: #999;
         }
 
-        /* قائمة الأسعار والخدمات */
+        /* قائمة الأسعار */
         .price-list {
             display: none;
             margin-top: 15px;
@@ -181,7 +191,7 @@
             background-color: #cc0000;
         }
 
-        /* نافذة الطلب (الـ ID وإنستا باي) */
+        /* نافذة الطلب */
         #order-modal {
             display: none;
             position: fixed;
@@ -237,6 +247,45 @@
             border-radius: 8px;
             cursor: pointer;
         }
+
+        /* رسالة النجاح داخل الموقع */
+        #success-message {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            justify-content: center;
+            align-items: center;
+            z-index: 1001;
+            padding: 20px;
+        }
+        .success-box {
+            background: #150505;
+            border: 2px solid #00ff66;
+            padding: 30px;
+            border-radius: 16px;
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+        .success-box i {
+            font-size: 3rem;
+            color: #00ff66;
+            margin-bottom: 15px;
+        }
+        .success-box h3 {
+            color: #00ff66;
+            margin-bottom: 10px;
+        }
+        .success-box p {
+            color: #ccc;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+
         footer {
             text-align: center;
             margin-top: 40px;
@@ -251,7 +300,9 @@
     <div id="login-screen">
         <div class="login-box">
             <h2>تسجيل الدخول لـ Joks Store</h2>
-            <input type="text" id="username" placeholder="اكتب اسمك أو رقمك للتبليغ">
+            <p>أدخل بياناتك للمتابعة لشحن الألعاب</p>
+            <input type="text" id="phone" placeholder="رقم الهاتف">
+            <input type="email" id="email" placeholder="البريد الإلكتروني">
             <button onclick="login()">دخول للمتجر</button>
         </div>
     </div>
@@ -270,7 +321,7 @@
             <div class="game-card" onclick="togglePrices('ff-prices')">
                 <div class="game-header">
                     <div class="game-info">
-                        <i class="fa-solid fa-fire"></i>
+                        <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=100&h=100&fit=crop" class="game-img" alt="Free Fire">
                         <div>
                             <div class="game-name">Free Fire - فري فاير</div>
                             <div class="game-desc">اضغط لعرض باقات الجواهر والأسعار</div>
@@ -279,21 +330,10 @@
                     <i class="fa-solid fa-chevron-down" style="color: #ff1a1a;"></i>
                 </div>
                 <div id="ff-prices" class="price-list" onclick="event.stopPropagation()">
-                    <div class="price-item">
-                        <span>100 جوهرة</span>
-                        <span>50 جنيه</span>
-                        <button class="select-btn" onclick="openOrder('Free Fire - 100 جوهرة')">شراء</button>
-                    </div>
-                    <div class="price-item">
-                        <span>310 جوهرة</span>
-                        <span>150 جنيه</span>
-                        <button class="select-btn" onclick="openOrder('Free Fire - 310 جوهرة')">شراء</button>
-                    </div>
-                    <div class="price-item">
-                        <span>520 جوهرة</span>
-                        <span>250 جنيه</span>
-                        <button class="select-btn" onclick="openOrder('Free Fire - 520 جوهرة')">شراء</button>
-                    </div>
+                    <div class="price-item"><span>100 جوهرة</span><span>50 جنيه</span><button class="select-btn" onclick="openOrder('Free Fire - 100 جوهرة')">شراء</button></div>
+                    <div class="price-item"><span>310 جوهرة</span><span>150 جنيه</span><button class="select-btn" onclick="openOrder('Free Fire - 310 جوهرة')">شراء</button></div>
+                    <div class="price-item"><span>520 جوهرة</span><span>250 جنيه</span><button class="select-btn" onclick="openOrder('Free Fire - 520 جوهرة')">شراء</button></div>
+                    <div class="price-item"><span>1060 جوهرة</span><span>500 جنيه</span><button class="select-btn" onclick="openOrder('Free Fire - 1060 جوهرة')">شراء</button></div>
                 </div>
             </div>
 
@@ -301,7 +341,7 @@
             <div class="game-card" onclick="togglePrices('pubg-prices')">
                 <div class="game-header">
                     <div class="game-info">
-                        <i class="fa-solid fa-shield-halved"></i>
+                        <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=100&h=100&fit=crop" class="game-img" alt="PUBG">
                         <div>
                             <div class="game-name">PUBG Mobile - ببجي موبايل</div>
                             <div class="game-desc">اضغط لعرض باقات الـ UC والأسعار</div>
@@ -310,21 +350,10 @@
                     <i class="fa-solid fa-chevron-down" style="color: #ff1a1a;"></i>
                 </div>
                 <div id="pubg-prices" class="price-list" onclick="event.stopPropagation()">
-                    <div class="price-item">
-                        <span>60 شدة (UC)</span>
-                        <span>40 جنيه</span>
-                        <button class="select-btn" onclick="openOrder('PUBG - 60 UC')">شراء</button>
-                    </div>
-                    <div class="price-item">
-                        <span>325 شدة (UC)</span>
-                        <span>200 جنيه</span>
-                        <button class="select-btn" onclick="openOrder('PUBG - 325 UC')">شراء</button>
-                    </div>
-                    <div class="price-item">
-                        <span>660 شدة (UC)</span>
-                        <span>400 جنيه</span>
-                        <button class="select-btn" onclick="openOrder('PUBG - 660 UC')">شراء</button>
-                    </div>
+                    <div class="price-item"><span>60 شدة (UC)</span><span>40 جنيه</span><button class="select-btn" onclick="openOrder('PUBG - 60 UC')">شراء</button></div>
+                    <div class="price-item"><span>325 شدة (UC)</span><span>200 جنيه</span><button class="select-btn" onclick="openOrder('PUBG - 325 UC')">شراء</button></div>
+                    <div class="price-item"><span>660 شدة (UC)</span><span>400 جنيه</span><button class="select-btn" onclick="openOrder('PUBG - 660 UC')">شراء</button></div>
+                    <div class="price-item"><span>1800 شدة (UC)</span><span>1050 جنيه</span><button class="select-btn" onclick="openOrder('PUBG - 1800 UC')">شراء</button></div>
                 </div>
             </div>
 
@@ -332,7 +361,7 @@
             <div class="game-card" onclick="togglePrices('fc-prices')">
                 <div class="game-header">
                     <div class="game-info">
-                        <i class="fa-solid fa-futbol"></i>
+                        <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=100&h=100&fit=crop" class="game-img" alt="FC Mobile">
                         <div>
                             <div class="game-name">FC Mobile - إف سي موبايل</div>
                             <div class="game-desc">اضغط لعرض باقات النقاط</div>
@@ -341,11 +370,64 @@
                     <i class="fa-solid fa-chevron-down" style="color: #ff1a1a;"></i>
                 </div>
                 <div id="fc-prices" class="price-list" onclick="event.stopPropagation()">
-                    <div class="price-item">
-                        <span>باقة النقاط الأساسية</span>
-                        <span>100 جنيه</span>
-                        <button class="select-btn" onclick="openOrder('FC Mobile - نقاط')">شراء</button>
+                    <div class="price-item"><span>250 نقطة</span><span>95 جنيه</span><button class="select-btn" onclick="openOrder('FC Mobile - 250 نقطة')">شراء</button></div>
+                    <div class="price-item"><span>500 نقطة</span><span>180 جنيه</span><button class="select-btn" onclick="openOrder('FC Mobile - 500 نقطة')">شراء</button></div>
+                    <div class="price-item"><span>1050 نقطة</span><span>360 جنيه</span><button class="select-btn" onclick="openOrder('FC Mobile - 1050 نقطة')">شراء</button></div>
+                </div>
+            </div>
+
+            <!-- Call of Duty -->
+            <div class="game-card" onclick="togglePrices('cod-prices')">
+                <div class="game-header">
+                    <div class="game-info">
+                        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=100&h=100&fit=crop" class="game-img" alt="Call of Duty">
+                        <div>
+                            <div class="game-name">Call of Duty - كول آف ديوتي</div>
+                            <div class="game-desc">اضغط لعرض باقات الكودز</div>
+                        </div>
                     </div>
+                    <i class="fa-solid fa-chevron-down" style="color: #ff1a1a;"></i>
+                </div>
+                <div id="cod-prices" class="price-list" onclick="event.stopPropagation()">
+                    <div class="price-item"><span>80 كود (CP)</span><span>50 جنيه</span><button class="select-btn" onclick="openOrder('COD - 80 CP')">شراء</button></div>
+                    <div class="price-item"><span>420 كود (CP)</span><span>230 جنيه</span><button class="select-btn" onclick="openOrder('COD - 420 CP')">شراء</button></div>
+                    <div class="price-item"><span>880 كود (CP)</span><span>450 جنيه</span><button class="select-btn" onclick="openOrder('COD - 880 CP')">شراء</button></div>
+                </div>
+            </div>
+
+            <!-- Valorant -->
+            <div class="game-card" onclick="togglePrices('val-prices')">
+                <div class="game-header">
+                    <div class="game-info">
+                        <img src="https://images.unsplash.com/photo-1560253023-3ec5d502959f?w=100&h=100&fit=crop" class="game-img" alt="Valorant">
+                        <div>
+                            <div class="game-name">Valorant - فالورانت</div>
+                            <div class="game-desc">اضغط لعرض نقاط فالورانت</div>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-chevron-down" style="color: #ff1a1a;"></i>
+                </div>
+                <div id="val-prices" class="price-list" onclick="event.stopPropagation()">
+                    <div class="price-item"><span>475 نقطة VP</span><span>180 جنيه</span><button class="select-btn" onclick="openOrder('Valorant - 475 VP')">شراء</button></div>
+                    <div class="price-item"><span>1000 نقطة VP</span><span>360 جنيه</span><button class="select-btn" onclick="openOrder('Valorant - 1000 VP')">شراء</button></div>
+                </div>
+            </div>
+
+            <!-- Yalla Ludo -->
+            <div class="game-card" onclick="togglePrices('ludo-prices')">
+                <div class="game-header">
+                    <div class="game-info">
+                        <img src="https://images.unsplash.com/photo-1612287233002-b1d0ba1395c0?w=100&h=100&fit=crop" class="game-img" alt="Yalla Ludo">
+                        <div>
+                            <div class="game-name">Yalla Ludo - يلا لودو</div>
+                            <div class="game-desc">اضغط لعرض جواهر وماس لودو</div>
+                        </div>
+                    </div>
+                    <i class="fa-solid fa-chevron-down" style="color: #ff1a1a;"></i>
+                </div>
+                <div id="ludo-prices" class="price-list" onclick="event.stopPropagation()">
+                    <div class="price-item"><span>310 الماس</span><span>65 جنيه</span><button class="select-btn" onclick="openOrder('Ludo - 310 الماس')">شراء</button></div>
+                    <div class="price-item"><span>930 الماس</span><span>190 جنيه</span><button class="select-btn" onclick="openOrder('Ludo - 930 الماس')">شراء</button></div>
                 </div>
             </div>
 
@@ -356,31 +438,42 @@
         </footer>
     </div>
 
-    <!-- نافذة إدخال الـ ID وتأكيد إنستا باي -->
+    <!-- نافذة إدخال الـ ID وإنستا باي -->
     <div id="order-modal">
         <div class="order-content">
             <h3>إتمام الطلب</h3>
             <p id="selected-item-title" style="margin-bottom: 15px; color: #ff9999; font-weight: 700;"></p>
             
             <input type="text" id="user-game-id" placeholder="اكتب الـ ID الخاص بك في اللعبة">
-            <input type="text" id="user-phone" placeholder="رقم الموبايل للتواصل">
+            <input type="text" id="user-phone-order" placeholder="رقم الهاتف للتأكيد">
             
             <div class="instapay-info">
-                💳 تحويل المبلغ على حساب إنستا باي (InstaPay):<br>
+                💳 قم بتحويل المبلغ على حساب إنستا باي (InstaPay):<br>
                 <strong>01001477719</strong><br>
-                (قم بالتحويل واضغط إرسال الطلب للواتساب)
+                ثم اضغط تأكيد الطلب.
             </div>
 
-            <button class="btn" onclick="sendToWhatsApp()">إرسال الطلب واتساب</button>
+            <button class="btn" onclick="submitOrder()">تأكيد وإرسال الطلب</button>
             <button class="close-btn" onclick="closeOrder()">إلغاء</button>
+        </div>
+    </div>
+
+    <!-- رسالة النجاح تظهر داخل الموقع -->
+    <div id="success-message">
+        <div class="success-box">
+            <i class="fa-solid fa-circle-check"></i>
+            <h3>تم تسجيل طلبك بنجاح!</h3>
+            <p>تم استلام الـ ID وبيانات التحويل بنجاح. سيتم مراجعة الدفع عبر إنستا باي وتنفيذ طلبك في أسرع وقت.</p>
+            <button class="btn" onclick="closeSuccess()">حسناً</button>
         </div>
     </div>
 
     <script>
         function login() {
-            let name = document.getElementById('username').value;
-            if(name.trim() === "") {
-                alert("من فضلك اكتب اسمك أو رقمك للدخول!");
+            let phone = document.getElementById('phone').value;
+            let email = document.getElementById('email').value;
+            if(phone.trim() === "" || email.trim() === "") {
+                alert("من فضلك أدخل رقم الهاتف والبريد الإلكتروني للدخول!");
                 return;
             }
             document.getElementById('login-screen').style.display = 'none';
@@ -392,7 +485,6 @@
             if(element.style.display === "block") {
                 element.style.display = "none";
             } else {
-                // إغلاق أي قوائم مفتوحة تانية
                 let lists = document.getElementsByClassName('price-list');
                 for(let list of lists) { list.style.display = 'none'; }
                 element.style.display = "block";
@@ -410,21 +502,5 @@
             document.getElementById('order-modal').style.display = 'none';
         }
 
-        function sendToWhatsApp() {
-            let gameId = document.getElementById('user-game-id').value;
-            let phone = document.getElementById('user-phone').value;
-
-            if(gameId.trim() === "" || phone.trim() === "") {
-                alert("من فضلك اكتب الـ ID ورقم الموبايل!");
-                return;
-            }
-
-            let myWhatsApp = "201001477719";
-            let message = `مرحباً، أريد طلب شحن:\n*الخدمة:* ${chosenService}\n*الـ ID:* ${gameId}\n*رقم التليفون:* ${phone}\n(تم التحويل عبر إنستا باي على الرقم 01001477719)`;
-            
-            let url = `https://wa.me/${myWhatsApp}?text=` + encodeURIComponent(message);
-            window.open(url, '_blank');
-        }
-    </script>
-</body>
-</html>
+        function submitOrder() {
+            let gameId 
