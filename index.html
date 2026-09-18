@@ -3,189 +3,214 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>JOKS STORE | شحن الألعاب</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="style.css">
+    <title>JOKS STORE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+        }
+        body {
+            background-color: #0b0b0b;
+            color: #ffffff;
+            overflow-x: hidden;
+            position: relative;
+        }
+        /* خلفية شبكة الإضاءة الحمراء */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle, rgba(255, 0, 0, 0.15) 1px, transparent 1px);
+            background-size: 30px 30px;
+            z-index: -1;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background: rgba(15, 15, 15, 0.9);
+            border-bottom: 1px solid #222;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo {
+            font-size: 22px;
+            font-weight: 900;
+            color: #ff1e1e;
+            letter-spacing: 1px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 15px;
+            font-size: 14px;
+            color: #ccc;
+        }
+        .login-btn {
+            background: linear-gradient(135deg, #ff1e1e, #8b0000);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .hero {
+            text-align: center;
+            padding: 50px 20px;
+        }
+        .hero h1 {
+            font-size: 28px;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+        .hero h1 span {
+            color: #ff1e1e;
+        }
+        .hero p {
+            color: #aaa;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+        .main-btn {
+            background: linear-gradient(135deg, #ff1e1e, #b30000);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 30, 30, 0.4);
+        }
+        .section-title {
+            text-align: center;
+            margin: 40px 0 20px;
+            font-size: 22px;
+            font-weight: 900;
+            color: #fff;
+        }
+        .games-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            padding: 0 20px 40px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .game-card {
+            background: #141414;
+            border: 1px solid #262626;
+            border-radius: 14px;
+            overflow: hidden;
+            text-align: center;
+            padding-bottom: 15px;
+        }
+        .game-img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+        }
+        .game-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin: 15px 0;
+        }
+        .game-btn {
+            background: #1f1f1f;
+            color: #fff;
+            border: 1px solid #333;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 85%;
+        }
+        .transfer-box {
+            background: #141414;
+            border: 1px solid #ff1e1e;
+            margin: 20px;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        .transfer-number {
+            font-size: 22px;
+            font-weight: 900;
+            color: #ff1e1e;
+            margin: 10px 0;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 13px;
+            border-top: 1px solid #222;
+        }
+    </style>
 </head>
-
 <body>
 
-    <!-- Animated Background -->
-    <div class="background">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
+    <div class="bg-grid"></div>
 
-    <!-- Navigation -->
-    <header class="navbar">
-        <div class="logo">
-            <span>JOKS</span> STORE
+    <header>
+        <div class="logo">JOKS STORE</div>
+        <div class="nav-links">
+            <span>الألعاب</span>
+            <span>عن المتجر</span>
         </div>
-
-        <nav>
-            <a href="#home">الرئيسية</a>
-            <a href="#games">الألعاب</a>
-            <a href="#orders">طلباتي</a>
-            <a href="#about">من نحن</a>
-        </nav>
-
-        <div class="nav-actions">
-            <span id="welcomeUser"></span>
-            <button class="admin-btn" onclick="openAdmin()">الإدارة</button>
-            <button class="logout-btn" onclick="logout()">خروج</button>
-        </div>
+        <button class="login-btn">دخول</button>
     </header>
 
-    <!-- Login -->
-    <section id="loginPage" class="auth-page">
-
-        <div class="auth-box">
-
-            <div class="auth-logo">
-                <span>JOKS</span> STORE
-            </div>
-
-            <h1>مرحباً بك 👋</h1>
-            <p>سجل الدخول لبدء شحن ألعابك</p>
-
-            <form id="loginForm">
-
-                <div class="input-group">
-                    <label>اسم المستخدم</label>
-                    <input
-                        type="text"
-                        id="loginUsername"
-                        placeholder="اكتب اسم المستخدم"
-                        required
-                    >
-                </div>
-
-                <div class="input-group">
-                    <label>كلمة المرور</label>
-                    <input
-                        type="password"
-                        id="loginPassword"
-                        placeholder="اكتب كلمة المرور"
-                        required
-                    >
-                </div>
-
-                <button class="main-btn" type="submit">
-                    تسجيل الدخول
-                </button>
-
-            </form>
-
-            <p class="demo-note">
-                للتجربة: اكتب أي اسم مستخدم وكلمة مرور.
-            </p>
-
-        </div>
-
+    <section class="hero">
+        <h1>شحن ألعابك... أسهل وأسرع</h1>
+        <p>أهلاً بيك في JOKS STORE مكانك المفضل لشحن الألعاب بسرعة وأمان وبأسعار مناسبة.</p>
+        <button class="main-btn">ابدأ الشحن الآن 🚀</button>
     </section>
 
-    <!-- Main Website -->
-    <main id="mainSite" class="hidden">
+    <div class="transfer-box">
+        <p>💳 حول المبلغ المطلوب إلى رقم فودافون كاش التالي:</p>
+        <div class="transfer-number">01001477719</div>
+        <p style="font-size: 12px; color: #aaa;">بعد التحويل، اعد كتابة رقمك ورقم الحوالة لتأكيد الطلب.</p>
+    </div>
 
-        <!-- Hero -->
-        <section id="home" class="hero">
+    <div class="section-title">الألعاب المتاحة</div>
 
-            <div class="hero-content">
+    <div class="games-container">
+        <div class="game-card">
+            <div style="background:#0055ff; height:140px; display:flex; align-items:center; justify-content:center; font-size:24px; font-weight:bold;">8 Ball Pool</div>
+            <div class="game-title">Ball Pool 8</div>
+            <button class="game-btn">عرض الباقات</button>
+        </div>
 
-                <div class="badge">
-                    ⚡ شحن سريع وآمن
-                </div>
+        <div class="game-card">
+            <div style="background:#00aa44; height:140px; display:flex; align-items:center; justify-content:center; font-size:24px; font-weight:bold;">FC Mobile</div>
+            <div class="game-title">FC Mobile</div>
+            <button class="game-btn">عرض الباقات</button>
+        </div>
 
-                <h1>
-                    اشحن ألعابك مع
-                    <span>JOKS STORE</span>
-                </h1>
+        <div class="game-card">
+            <div style="background:#ff5500; height:140px; display:flex; align-items:center; justify-content:center; font-size:24px; font-weight:bold;">Free Fire</div>
+            <div class="game-title">Free Fire</div>
+            <button class="game-btn">عرض الباقات</button>
+        </div>
 
-                <p>
-                    أسرع وأسهل طريقة لشحن ألعابك المفضلة
-                    بطريقة بسيطة وآمنة.
-                </p>
+        <div class="game-card">
+            <div style="background:#333333; height:140px; display:flex; align-items:center; justify-content:center; font-size:24px; font-weight:bold;">PUBG MOBILE</div>
+            <div class="game-title">PUBG</div>
+            <button class="game-btn">عرض الباقات</button>
+        </div>
+    </div>
 
-                <a href="#games" class="main-btn hero-btn">
-                    ابدأ الشحن الآن 🎮
-                </a>
+    <footer>
+        <p>© 2026 JOKS STORE — جميع الحقوق محفوظة</p>
+    </footer>
 
-            </div>
-
-            <div class="hero-card">
-                <div class="card-glow"></div>
-                <div class="game-card">
-                    <span>JOKS</span>
-                    <small>GAME STORE</small>
-                    <strong>TOP UP</strong>
-                </div>
-            </div>
-
-        </section>
-
-        <!-- Games -->
-        <section id="games" class="section">
-
-            <div class="section-title">
-                <span>🎮</span>
-                <h2>الألعاب</h2>
-                <p>اختر اللعبة التي تريد شحنها</p>
-            </div>
-
-            <div id="gamesGrid" class="games-grid"></div>
-
-        </section>
-
-        <!-- Order -->
-        <section id="orderSection" class="section order-section hidden">
-
-            <div class="section-title">
-                <span>🛒</span>
-                <h2>إتمام الطلب</h2>
-                <p id="selectedGameText"></p>
-            </div>
-
-            <div class="order-box">
-
-                <form id="orderForm">
-
-                    <input type="hidden" id="selectedGame">
-
-                    <div class="form-row">
-
-                        <div class="input-group">
-                            <label>الخدمة / الباقة</label>
-
-                            <select id="service" required>
-                                <option value="">اختر الخدمة</option>
-                            </select>
-                        </div>
-
-                        <div class="input-group">
-                            <label>ID اللاعب</label>
-
-                            <input
-                                type="text"
-                                id="playerId"
-                                placeholder="مثال: 123456789"
-                                required
-                            >
-                        </div>
-
-                    </div>
-
-                    <div class="input-group">
-                        <label>رقم الهاتف</label>
-
-                        <input
-                            type="tel
+</body>
+</html>
