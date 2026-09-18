@@ -141,7 +141,7 @@
             color: #888;
         }
 
-        /* صندوق تحويل إنستا باي */
+        /* صندوق تحويل إنستا باي برقم الموبايل */
         .transfer-box {
             background: #141414;
             border: 1px solid #ff1e1e;
@@ -153,11 +153,11 @@
             box-shadow: 0 0 15px rgba(255, 30, 30, 0.15);
         }
         .transfer-number {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 900;
             color: #ff1e1e;
             margin: 8px 0;
-            direction: ltr;
+            letter-spacing: 1px;
         }
         .section-title {
             text-align: center;
@@ -338,22 +338,22 @@
     <header>
         <div class="logo">JOKS STORE</div>
         <div class="nav-links">
-            <span onclick="scrollToGames()">الألعاب</span>
-            <span onclick="alert('JOKS STORE - المتجر المعتمد لشحن الألعاب بسرعة وأمان تام عبر InstaPay.')">عن المتجر</span>
+            <span id="nav-games">الألعاب</span>
+            <span id="nav-about">عن المتجر</span>
         </div>
         <div>
             <span id="user-status-text" class="user-status"></span>
-            <button id="auth-btn" class="login-btn" onclick="openLoginModal()">تسجيل الدخول</button>
+            <button id="auth-btn" class="login-btn">تسجيل الدخول</button>
         </div>
     </header>
 
     <section class="hero" id="home">
         <h1>شحن ألعابك... أسهل وأسرع <span>بأمان تام</span></h1>
         <p>أهلاً بيك في JOKS STORE وجهتك الأولى لشحن الألعاب الرسمية فوراً وبأفضل الأسعار المتاحة.</p>
-        <button class="main-btn" onclick="scrollToGames()">ابدأ الشحن الآن 🚀</button>
+        <button class="main-btn" id="hero-start-btn">ابدأ الشحن الآن 🚀</button>
     </section>
 
-    <!-- مميزات تدي ثقة للعميل -->
+    <!-- مميزات الثقة -->
     <div class="trust-section">
         <div class="trust-box">
             <i class="fa-solid fa-bolt"></i>
@@ -372,11 +372,11 @@
         </div>
     </div>
 
-    <!-- صندوق التحويل عبر إنستا باي -->
+    <!-- صندوق تحويل إنستا باي برقم الموبايل -->
     <div class="transfer-box">
-        <p>💳 حول المبلغ المطلوب عبر تطبيق إنستا باي (InstaPay) إلى الحساب الآتي:</p>
-        <div class="transfer-number">youssef@instapay</div>
-        <p style="font-size: 11px; color: #aaa;">يجب تسجيل الدخول أولاً وإتمام التحويل لتأكيد الطلب.</p>
+        <p>💳 حول المبلغ عبر إنستا باي (InstaPay) إلى رقم الموبايل الآتي:</p>
+        <div class="transfer-number">01001477719</div>
+        <p style="font-size: 11px; color: #aaa;">يجب تسجيل الدخول وإتمام التحويل لتأكيد الطلب بنجاح.</p>
     </div>
 
     <div class="section-title" id="games-section">الألعاب المتاحة للشحن</div>
@@ -388,7 +388,7 @@
                 <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=600&auto=format&fit=crop&q=80" alt="Free Fire">
             </div>
             <div class="game-title">Free Fire</div>
-            <button class="game-btn" onclick="openPackages('Free Fire')">عرض الباقات</button>
+            <button class="game-btn" data-game="Free Fire">عرض الباقات</button>
         </div>
 
         <!-- PUBG Mobile -->
@@ -397,7 +397,7 @@
                 <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&auto=format&fit=crop&q=80" alt="PUBG Mobile">
             </div>
             <div class="game-title">PUBG Mobile</div>
-            <button class="game-btn" onclick="openPackages('PUBG Mobile')">عرض الباقات</button>
+            <button class="game-btn" data-game="PUBG Mobile">عرض الباقات</button>
         </div>
 
         <!-- FC Mobile -->
@@ -406,7 +406,7 @@
                 <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=600&auto=format&fit=crop&q=80" alt="FC Mobile">
             </div>
             <div class="game-title">FC Mobile</div>
-            <button class="game-btn" onclick="openPackages('FC Mobile')">عرض الباقات</button>
+            <button class="game-btn" data-game="FC Mobile">عرض الباقات</button>
         </div>
 
         <!-- 8 Ball Pool -->
@@ -415,7 +415,7 @@
                 <img src="https://images.unsplash.com/photo-1579373903781-fd5c0c30c4cd?w=600&auto=format&fit=crop&q=80" alt="8 Ball Pool">
             </div>
             <div class="game-title">8 Ball Pool</div>
-            <button class="game-btn" onclick="openPackages('8 Ball Pool')">عرض الباقات</button>
+            <button class="game-btn" data-game="8 Ball Pool">عرض الباقات</button>
         </div>
     </div>
 
@@ -424,7 +424,7 @@
         <div class="modal-content">
             <h3 id="modal-game-title" style="color: #ff1e1e; margin-bottom: 15px;"></h3>
             <div id="packages-list"></div>
-            <button class="close-modal" onclick="closeModal('packages-modal')">إغلاق</button>
+            <button class="close-modal" data-close="packages-modal">إغلاق</button>
         </div>
     </div>
 
@@ -443,24 +443,24 @@
                 <input type="text" id="user-phone" placeholder="01xxxxxxxx0">
             </div>
             <div class="form-group">
-                <label>اسم الحساب المحول منه (إنستا باي):</label>
-                <input type="text" id="sender-account" placeholder="اسم صاحب الحساب أو المعرف">
+                <label>اسم صاحب حساب إنستا باي المحول منه:</label>
+                <input type="text" id="sender-account" placeholder="اسمك المسجل في إنستا باي">
             </div>
             <div style="background: #1f1f1f; padding: 10px; border-radius: 8px; margin-bottom: 12px; font-size: 13px;">
                 المبلغ المطلـوب: <span id="pkg-price-text" style="color: #ff1e1e; font-weight: bold;"></span>
-                <div style="font-size: 11px; color: #aaa; margin-top: 3px;">التحويل على عنوان InstaPay: <b>youssef@instapay</b></div>
+                <div style="font-size: 11px; color: #aaa; margin-top: 3px;">التحويل على رقم: <b>01001477719</b></div>
             </div>
 
-            <button class="submit-order-btn" onclick="submitOrder()">إرسال الطلب للمراجعة 🚀</button>
-            <button class="close-modal" onclick="closeModal('checkout-modal')">رجوع</button>
+            <button class="submit-order-btn" id="submit-order-btn">إرسال الطلب للمراجعة 🚀</button>
+            <button class="close-modal" data-close="checkout-modal">رجوع</button>
         </div>
     </div>
 
-    <!-- نافذة تسجيل الدخول الإجبارية -->
+    <!-- نافذة تسجيل الدخول -->
     <div id="login-modal" class="modal">
         <div class="modal-content">
             <h3 style="color: #ff1e1e; margin-bottom: 15px;">تسجيل الدخول للمتجر</h3>
-            <p style="font-size: 12px; color: #aaa; margin-bottom: 15px;">يجب تسجيل الدخول لكي تتمكن من اختيار الباقات وإتمام الشحن.</p>
+            <p style="font-size: 12px; color: #aaa; margin-bottom: 15px;">يجب تسجيل الدخول لكي تتمكن من اختيار الباقات والشحن.</p>
             <div class="form-group">
                 <label>الاسم:</label>
                 <input type="text" id="login-name" placeholder="اكتب اسمك">
@@ -469,20 +469,20 @@
                 <label>رقم الموبايل:</label>
                 <input type="text" id="login-phone" placeholder="01xxxxxxxx0">
             </div>
-            <button class="submit-order-btn" onclick="performLogin()">دخول للمتجر ✓</button>
-            <button class="close-modal" onclick="closeModal('login-modal')">إلغاء</button>
+            <button class="submit-order-btn" id="perform-login-btn">دخول للمتجر ✓</button>
+            <button class="close-modal" data-close="login-modal">إلغاء</button>
         </div>
     </div>
 
     <!-- لوحة الإدارة (كلمة المرور 1234) -->
-    <button class="admin-trigger" onclick="openAdminPanel()"><i class="fa-solid fa-lock"></i> لوحة الإدارة</button>
+    <button class="admin-trigger" id="admin-trigger-btn"><i class="fa-solid fa-lock"></i> لوحة الإدارة</button>
 
     <div id="admin-modal" class="modal">
         <div class="modal-content" style="max-width: 520px;">
             <h3 style="color: #ff1e1e; margin-bottom: 5px;">لوحة تحكم الطلبات</h3>
             <p style="font-size: 11px; color: #888; margin-bottom: 15px;">الطلبات الواردة من العملاء عبر InstaPay</p>
             <div id="admin-orders-list" style="text-align: right; max-height: 320px; overflow-y: auto;"></div>
-            <button class="close-modal" onclick="closeModal('admin-modal')">إغلاق لوحة الإدارة</button>
+            <button class="close-modal" data-close="admin-modal">إغلاق لوحة الإدارة</button>
         </div>
     </div>
 
@@ -526,51 +526,47 @@
             ]
         };
 
-        function scrollToGames() {
-            document.getElementById('games-section').scrollIntoView({behavior: 'smooth'});
-        }
+        // ربط الأزرار برمجياً بالكامل لضمان التشغيل الفوري
+        document.addEventListener("DOMContentLoaded", () => {
+            // التمرير لقسم الألعاب
+            document.getElementById('hero-start-btn').addEventListener('click', () => {
+                document.getElementById('games-section').scrollIntoView({behavior: 'smooth'});
+            });
+            document.getElementById('nav-games').addEventListener('click', () => {
+                document.getElementById('games-section').scrollIntoView({behavior: 'smooth'});
+            });
+            document.getElementById('nav-about').addEventListener('click', () => {
+                alert('JOKS STORE - المتجر المعتمد لشحن الألعاب بسرعة وأمان تام عبر InstaPay على الرقم 01001477719.');
+            });
 
-        function openLoginModal() {
-            document.getElementById('login-modal').style.display = 'flex';
-        }
+            // فتح نافذة تسجيل الدخول
+            document.getElementById('auth-btn').addEventListener('click', () => {
+                document.getElementById('login-modal').style.display = 'flex';
+            });
 
-        function performLogin() {
-            let name = document.getElementById('login-name').value.trim();
-            let phone = document.getElementById('login-phone').value.trim();
-            
-            if(!name || !phone) {
-                alert("من فضلك اكتب الاسم ورقم الموبايل لتسجيل الدخول!");
-                return;
-            }
+            // تنفيذ تسجيل الدخول
+            document.getElementById('perform-login-btn').addEventListener('click', () => {
+                let name = document.getElementById('login-name').value.trim();
+                let phone = document.getElementById('login-phone').value.trim();
+                
+                if(!name || !phone) {
+                    alert("من فضلك اكتب الاسم ورقم الموبايل لتسجيل الدخول!");
+                    return;
+                }
 
-            isLogedIn = true;
-            loggedUserName = name;
-            
-            document.getElementById('auth-btn').style.display = 'none';
-            let statusText = document.getElementById('user-status-text');
-            statusText.style.display = 'inline-block';
-            statusText.innerHTML = `مرحباً، ${name} ✓`;
+                isLogedIn = true;
+                loggedUserName = name;
+                
+                document.getElementById('auth-btn').style.display = 'none';
+                let statusText = document.getElementById('user-status-text');
+                statusText.style.display = 'inline-block';
+                statusText.innerHTML = `مرحباً، ${name} ✓`;
 
-            document.getElementById('login-modal').style.display = 'none';
-            alert("تم تسجيل الدخول بنجاح! يمكنك الآن تصفح الباقات وشحن ألعابك.");
-        }
+                document.getElementById('login-modal').style.display = 'none';
+                alert("تم تسجيل الدخول بنجاح! يمكنك الآن اختيار الباقات وشحن ألعابك.");
+            });
 
-        function openPackages(gameName) {
-            if(!isLogedIn) {
-                alert("عذراً، يجب تسجيل الدخول أولاً لتتمكن من عرض الباقات والشحن!");
-                openLoginModal();
-                return;
-            }
-
-            currentSelectedGame = gameName;
-            document.getElementById('modal-game-title').innerText = "باقات " + gameName;
-            
-            let listDiv = document.getElementById('packages-list');
-            listDiv.innerHTML = "";
-            
-            gamePackages[gameName].forEach(pkg => {
-                listDiv.innerHTML += `
-                    <div class="package-item">
-                        <div>
-                            <div style="font-weight:700; font-size:14px;">${pkg.name}</div>
-                            <div style="color:#ff1e1e; font-size:13px; font-weight 
+            // ربط أزرار عرض الباقات لكل لعبة
+            document.querySelectorAll('.game-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    let gameNa
