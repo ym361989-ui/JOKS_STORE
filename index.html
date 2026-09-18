@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JOKS STORE</title>
+    <title>JOKS STORE — المتجر الرسمي لشحن الألعاب</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -20,14 +20,15 @@
             position: relative;
             min-height: 100vh;
         }
+        /* خلفية شبكة الإضاءة الحمراء الفخمة */
         .bg-grid {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: radial-gradient(circle, rgba(255, 0, 0, 0.15) 1px, transparent 1px);
-            background-size: 30px 30px;
+            background-image: radial-gradient(circle, rgba(255, 30, 30, 0.18) 1.5px, transparent 1.5px);
+            background-size: 35px 35px;
             z-index: -1;
         }
         header {
@@ -35,11 +36,12 @@
             justify-content: space-between;
             align-items: center;
             padding: 15px 20px;
-            background: rgba(15, 15, 15, 0.95);
+            background: rgba(12, 12, 12, 0.95);
             border-bottom: 1px solid #222;
             position: sticky;
             top: 0;
             z-index: 100;
+            backdrop-filter: blur(10px);
         }
         .logo {
             font-size: 20px;
@@ -65,10 +67,17 @@
             border-radius: 8px;
             font-weight: 700;
             cursor: pointer;
+            box-shadow: 0 3px 10px rgba(255, 30, 30, 0.3);
+        }
+        .user-status {
+            font-size: 13px;
+            color: #00ff66;
+            font-weight: bold;
+            display: none;
         }
         .hero {
             text-align: center;
-            padding: 50px 20px 30px;
+            padding: 45px 20px 25px;
         }
         .hero h1 {
             font-size: 26px;
@@ -81,7 +90,8 @@
         .hero p {
             color: #aaa;
             font-size: 13px;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
+            line-height: 1.6;
         }
         .main-btn {
             background: linear-gradient(135deg, #ff1e1e, #b30000);
@@ -94,6 +104,37 @@
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(255, 30, 30, 0.4);
         }
+        /* قسم الثقة للعميل */
+        .trust-section {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 0 15px;
+            text-align: center;
+        }
+        .trust-box {
+            background: #141414;
+            border: 1px solid #222;
+            padding: 12px 8px;
+            border-radius: 10px;
+        }
+        .trust-box i {
+            color: #ff1e1e;
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        .trust-box h4 {
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+        .trust-box p {
+            font-size: 10px;
+            color: #888;
+        }
+
         .transfer-box {
             background: #141414;
             border: 1px solid #ff1e1e;
@@ -102,6 +143,7 @@
             padding: 15px;
             border-radius: 12px;
             text-align: center;
+            box-shadow: 0 0 15px rgba(255, 30, 30, 0.1);
         }
         .transfer-number {
             font-size: 20px;
@@ -131,6 +173,10 @@
             overflow: hidden;
             text-align: center;
             padding-bottom: 15px;
+            transition: 0.3s;
+        }
+        .game-card:hover {
+            border-color: #ff1e1e;
         }
         .game-img-container {
             width: 100%;
@@ -168,7 +214,7 @@
             background: #2a0000;
         }
 
-        /* نافذة الباقات والدفع */
+        /* النوافذ المنبثقة (Modals) */
         .modal {
             display: none;
             position: fixed;
@@ -185,7 +231,7 @@
             background: #141414;
             border: 2px solid #ff1e1e;
             width: 100%;
-            max-width: 400px;
+            max-width: 420px;
             border-radius: 16px;
             padding: 20px;
             text-align: center;
@@ -195,9 +241,9 @@
         .package-item {
             background: #1f1f1f;
             border: 1px solid #333;
-            padding: 12px;
+            padding: 10px 12px;
             border-radius: 10px;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -244,6 +290,8 @@
             cursor: pointer;
             font-size: 13px;
         }
+        
+        /* لوحة الإدارة المنظمة جداً */
         .admin-trigger {
             position: fixed;
             bottom: 15px;
@@ -256,6 +304,15 @@
             font-size: 12px;
             cursor: pointer;
             z-index: 99;
+        }
+        .admin-order-card {
+            background: #1b1b1b;
+            border-right: 4px solid #ff1e1e;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            text-align: right;
+            font-size: 12px;
         }
         footer {
             text-align: center;
@@ -274,35 +331,48 @@
         <div class="logo">JOKS STORE</div>
         <div class="nav-links">
             <span onclick="scrollToGames()">الألعاب</span>
-            <span onclick="alert('JOKS STORE - المتجر المعتمد لشحن الألعاب بسرعة وأمان تام.')">عن المتجر</span>
+            <span onclick="alert('JOKS STORE - المتجر المعتمد لشحن الألعاب بسرعة وأمان تام في مصر.')">عن المتجر</span>
         </div>
-        <button class="login-btn" onclick="openLoginModal()">دخول</button>
+        <div>
+            <span id="user-status-text" class="user-status"></span>
+            <button id="auth-btn" class="login-btn" onclick="openLoginModal()">تسجيل الدخول</button>
+        </div>
     </header>
 
     <section class="hero" id="home">
-        <h1>شحن ألعابك... أسهل وأسرع</h1>
-        <p>أهلاً بيك في JOKS STORE مكانك المفضل لشحن الألعاب بسرعة وأمان وبأسعار مناسبة.</p>
+        <h1>شحن ألعابك... أسهل وأسرع <span>بأمان تام</span></h1>
+        <p>أهلاً بيك في JOKS STORE وجهتك الأولى لشحن الألعاب الرسمية فوراً وبأفضل الأسعار المتاحة.</p>
         <button class="main-btn" onclick="scrollToGames()">ابدأ الشحن الآن 🚀</button>
     </section>
 
+    <!-- مميزات تدي ثقة للعميل -->
+    <div class="trust-section">
+        <div class="trust-box">
+            <i class="fa-solid fa-bolt"></i>
+            <h4>شحن فوري</h4>
+            <p>وصول الشحن بدقائق</p>
+        </div>
+        <div class="trust-box">
+            <i class="fa-solid fa-shield-halved"></i>
+            <h4>أمان 100%</h4>
+            <p>معاملات مضمونة رسمياً</p>
+        </div>
+        <div class="trust-box">
+            <i class="fa-solid fa-headset"></i>
+            <h4>دعم متواصل</h4>
+            <p>خدمة عملاء طوال الوقت</p>
+        </div>
+    </div>
+
     <div class="transfer-box">
-        <p>💳 حول المبلغ المطلوب إلى رقم فودافون كاش التالي:</p>
+        <p>💳 حول المبلغ المطلوب إلى رقم فودافون كاش الرسمي:</p>
         <div class="transfer-number">01001477719</div>
-        <p style="font-size: 11px; color: #aaa;">بعد التحويل، اعد كتابة رقمك ورقم الحوالة لتأكيد الطلب.</p>
+        <p style="font-size: 11px; color: #aaa;">لا يمكن إتمام الطلب إلا بعد تسجيل الدخول وتحويل المبلغ.</p>
     </div>
 
     <div class="section-title" id="games-section">الألعاب المتاحة للشحن</div>
 
     <div class="games-container">
-        <!-- PUBG Mobile -->
-        <div class="game-card">
-            <div class="game-img-container">
-                <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&auto=format&fit=crop&q=80" alt="PUBG Mobile">
-            </div>
-            <div class="game-title">PUBG Mobile</div>
-            <button class="game-btn" onclick="openPackages('PUBG Mobile')">عرض الباقات</button>
-        </div>
-
         <!-- Free Fire -->
         <div class="game-card">
             <div class="game-img-container">
@@ -310,6 +380,15 @@
             </div>
             <div class="game-title">Free Fire</div>
             <button class="game-btn" onclick="openPackages('Free Fire')">عرض الباقات</button>
+        </div>
+
+        <!-- PUBG Mobile -->
+        <div class="game-card">
+            <div class="game-img-container">
+                <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&auto=format&fit=crop&q=80" alt="PUBG Mobile">
+            </div>
+            <div class="game-title">PUBG Mobile</div>
+            <button class="game-btn" onclick="openPackages('PUBG Mobile')">عرض الباقات</button>
         </div>
 
         <!-- FC Mobile -->
@@ -347,51 +426,53 @@
             <div id="checkout-info" style="font-size: 13px; color: #ccc; margin-bottom: 15px;"></div>
             
             <div class="form-group">
-                <label>ID اللاعب:</label>
-                <input type="text" id="user-game-id" placeholder="اكتب ID اللاعب">
+                <label>ID اللاعب داخل اللعبة:</label>
+                <input type="text" id="user-game-id" placeholder="اكتب ID اللاعب هنا">
             </div>
             <div class="form-group">
                 <label>رقم الموبايل الخاص بك:</label>
                 <input type="text" id="user-phone" placeholder="01xxxxxxxx0">
             </div>
             <div class="form-group">
-                <label>الرقم الذي تم التحويل منه:</label>
-                <input type="text" id="sender-phone" placeholder="اكتب رقمك المحول منه">
+                <label>الرقم المحول منه (فودافون كاش):</label>
+                <input type="text" id="sender-phone" placeholder="الرقم اللي حوّلت منه">
             </div>
             <div style="background: #1f1f1f; padding: 10px; border-radius: 8px; margin-bottom: 12px; font-size: 13px;">
-                المبلغ المطلوب: <span id="pkg-price-text" style="color: #ff1e1e; font-weight: bold;"></span>
-                <div style="font-size: 11px; color: #aaa; margin-top: 3px;">حول المبلغ إلى: <b>01001477719</b></div>
+                المبلغ المطلـوب: <span id="pkg-price-text" style="color: #ff1e1e; font-weight: bold;"></span>
+                <div style="font-size: 11px; color: #aaa; margin-top: 3px;">حول إلى رقم: <b>01001477719</b></div>
             </div>
 
-            <button class="submit-order-btn" onclick="submitOrder()">إرسال الطلب 🚀</button>
+            <button class="submit-order-btn" onclick="submitOrder()">إرسال الطلب للمراجعة 🚀</button>
             <button class="close-modal" onclick="closeModal('checkout-modal')">رجوع</button>
         </div>
     </div>
 
-    <!-- نافذة تسجيل الدخول -->
+    <!-- نافذة تسجيل الدخول (إجبارية) -->
     <div id="login-modal" class="modal">
         <div class="modal-content">
-            <h3 style="color: #ff1e1e; margin-bottom: 15px;">تسجيل الدخول</h3>
+            <h3 style="color: #ff1e1e; margin-bottom: 15px;">تسجيل الدخول للمتجر</h3>
+            <p style="font-size: 12px; color: #aaa; margin-bottom: 15px;">يجب تسجيل الدخول لكي تتمكن من اختيار الباقات وإتمام الشحن.</p>
             <div class="form-group">
-                <label>البريد الإلكتروني:</label>
-                <input type="email" placeholder="example@gmail.com">
+                <label>الاسم:</label>
+                <input type="text" id="login-name" placeholder="اكتب اسمك">
             </div>
             <div class="form-group">
-                <label>كلمة المرور:</label>
-                <input type="password" placeholder="********">
+                <label>رقم الموبايل:</label>
+                <input type="text" id="login-phone" placeholder="01xxxxxxxx0">
             </div>
-            <button class="submit-order-btn" onclick="alert('تم تسجيل الدخول بنجاح!'); closeModal('login-modal');">دخول</button>
-            <button class="close-modal" onclick="closeModal('login-modal')">إغلاق</button>
+            <button class="submit-order-btn" onclick="performLogin()">دخول للمتجر ✓</button>
+            <button class="close-modal" onclick="closeModal('login-modal')">إلغاء</button>
         </div>
     </div>
 
     <!-- لوحة الإدارة المخفية (كلمة المرور 1234) -->
-    <button class="admin-trigger" onclick="openAdminPanel()"><i class="fa-solid fa-lock"></i> الإدارة</button>
+    <button class="admin-trigger" onclick="openAdminPanel()"><i class="fa-solid fa-lock"></i> لوحة الإدارة</button>
 
     <div id="admin-modal" class="modal">
-        <div class="modal-content" style="max-width: 500px;">
-            <h3 style="color: #ff1e1e; margin-bottom: 15px;">لوحة التحكم - الطلبات الواردة</h3>
-            <div id="admin-orders-list" style="text-align: right; max-height: 300px; overflow-y: auto;"></div>
+        <div class="modal-content" style="max-width: 520px;">
+            <h3 style="color: #ff1e1e; margin-bottom: 5px;">لوحة تحكم الطلبات</h3>
+            <p style="font-size: 11px; color: #888; margin-bottom: 15px;">الطلبات الواردة من العملاء مع تفاصيل التحويل والـ ID</p>
+            <div id="admin-orders-list" style="text-align: right; max-height: 320px; overflow-y: auto;"></div>
             <button class="close-modal" onclick="closeModal('admin-modal')">إغلاق لوحة الإدارة</button>
         </div>
     </div>
@@ -401,23 +482,27 @@
     </footer>
 
     <script>
+        let isLogedIn = false;
+        let loggedUserName = "";
         let currentSelectedGame = "";
         let currentSelectedPackage = "";
         let currentSelectedPrice = "";
 
-        // قائمة الباقات الكاملة لكل لعبة بالأسعار
+        // القوائم الشاملة بالأسعار والباقات المطلوبة بدقة
         const gamePackages = {
+            "Free Fire": [
+                {name: "50 جوهرة", price: "25.00 جنيه"},
+                {name: "100 جوهرة", price: "50.00 جنيه"},
+                {name: "210 جوهرة", price: "100.00 جنيه"},
+                {name: "310 جوهرة", price: "150.00 جنيه"},
+                {name: "520 جوهرة", price: "250.00 جنيه"},
+                {name: "1060 جوهرة", price: "500.00 جنيه"}
+            ],
             "PUBG Mobile": [
                 {name: "60 UC (شدات)", price: "40.00 جنيه"},
                 {name: "325 UC (شدات)", price: "200.00 جنيه"},
                 {name: "660 UC (شدات)", price: "400.00 جنيه"},
                 {name: "1800 UC (شدات)", price: "1050.00 جنيه"}
-            ],
-            "Free Fire": [
-                {name: "100 جوهرة", price: "50.00 جنيه"},
-                {name: "310 جوهرة", price: "150.00 جنيه"},
-                {name: "520 جوهرة", price: "250.00 جنيه"},
-                {name: "1060 جوهرة", price: "500.00 جنيه"}
             ],
             "FC Mobile": [
                 {name: "100 Points", price: "30.00 جنيه"},
@@ -437,7 +522,39 @@
             document.getElementById('games-section').scrollIntoView({behavior: 'smooth'});
         }
 
+        function openLoginModal() {
+            document.getElementById('login-modal').style.display = 'flex';
+        }
+
+        function performLogin() {
+            let name = document.getElementById('login-name').value;
+            let phone = document.getElementById('login-phone').value;
+
+            if(!name || !phone) {
+                alert("من فضلك اكتب الاسم ورقم الموبايل لتسجيل الدخول!");
+                return;
+            }
+
+            isLogedIn = true;
+            loggedUserName = name;
+            
+            document.getElementById('auth-btn').style.display = 'none';
+            let statusText = document.getElementById('user-status-text');
+            statusText.style.display = 'inline-block';
+            statusText.innerHTML = `مرحباً، ${name} ✓`;
+
+            closeModal('login-modal');
+            alert("تم تسجيل الدخول بنجاح! يمكنك الآن اختيار الباقات وشحن ألعابك.");
+        }
+
         function openPackages(gameName) {
+            // التحقق من تسجيل الدخول أولاً
+            if(!isLogedIn) {
+                alert("عذراً، يجب تسجيل الدخول أولاً لتتمكن من عرض الباقات والشحن!");
+                openLoginModal();
+                return;
+            }
+
             currentSelectedGame = gameName;
             document.getElementById('modal-game-title').innerText = "باقات " + gameName;
             let listDiv = document.getElementById('packages-list');
@@ -455,95 +572,4 @@
                 `;
             });
             document.getElementById('packages-modal').style.display = 'flex';
-        }
-
-        function selectPackage(pkgName, pkgPrice) {
-            currentSelectedPackage = pkgName;
-            currentSelectedPrice = pkgPrice;
-            closeModal('packages-modal');
-            
-            document.getElementById('checkout-info').innerHTML = `🎮 اللعبة: <b>${currentSelectedGame}</b><br>📦 الباقة: <b>${currentSelectedPackage}</b>`;
-            document.getElementById('pkg-price-text').innerText = currentSelectedPrice;
-            document.getElementById('checkout-modal').style.display = 'flex';
-        }
-
-        function openLoginModal() {
-            document.getElementById('login-modal').style.display = 'flex';
-        }
-
-        function closeModal(modalId) {
-            document.getElementById(modalId).style.display = 'none';
-        }
-
-        function submitOrder() {
-            let gameId = document.getElementById('user-game-id').value;
-            let userPhone = document.getElementById('user-phone').value;
-            let senderPhone = document.getElementById('sender-phone').value;
-
-            if(!gameId || !userPhone || !senderPhone) {
-                alert("من فضلك املأ جميع الحقول المطلوبة!");
-                return;
-            }
-
-            let orders = JSON.parse(localStorage.getItem('joks_orders')) || [];
-            orders.push({
-                game: currentSelectedGame,
-                package: currentSelectedPackage,
-                price: currentSelectedPrice,
-                gameId: gameId,
-                userPhone: userPhone,
-                senderPhone: senderPhone,
-                time: new Date().toLocaleTimeString()
-            });
-            localStorage.setItem('joks_orders', JSON.stringify(orders));
-
-            alert("تم إرسال طلبك بنجاح! جاري مراجعة التحويل والشحن فوراً.");
-            closeModal('checkout-modal');
-            document.getElementById('user-game-id').value = "";
-            document.getElementById('user-phone').value = "";
-            document.getElementById('sender-phone').value = "";
-        }
-
-        function openAdminPanel() {
-            let pass = prompt("أدخل كلمة مرور لوحة الإدارة:");
-            if(pass === "1234") {
-                loadAdminOrders();
-                document.getElementById('admin-modal').style.display = 'flex';
-            } else if(pass !== null) {
-                alert("كلمة المرور غير صحيحة!");
-            }
-        }
-
-        function loadAdminOrders() {
-            let ordersList = document.getElementById('admin-orders-list');
-            let orders = JSON.parse(localStorage.getItem('joks_orders')) || [];
-            
-            if(orders.length === 0) {
-                ordersList.innerHTML = "<p style='color:#777; text-align:center;'>لا توجد طلبات جديدة حالياً.</p>";
-                return;
-            }
-
-            let html = "";
-            orders.forEach((ord, index) => {
-                html += `
-                    <div style="background:#1f1f1f; padding:10px; border-radius:8px; margin-bottom:8px; font-size:12px;">
-                        <div><b>${ord.game}</b> - ${ord.package} (${ord.price})</div>
-                        <div>ID اللاعب: <span style="color:#00ff66;">${ord.gameId}</span></div>
-                        <div>رقم العميل: ${ord.userPhone} | المحول منه: <span style="color:#ffcc00;">${ord.senderPhone}</span></div>
-                        <button style="background:#ff1e1e; color:#fff; border:none; padding:4px 8px; border-radius:4px; margin-top:5px; cursor:pointer;" onclick="deleteOrder(${index})">تم الشحن ✓</button>
-                    </div>
-                `;
-            });
-            ordersList.innerHTML = html;
-        }
-
-        function deleteOrder(index) {
-            let orders = JSON.parse(localStorage.getItem('joks_orders')) || [];
-            orders.splice(index, 1);
-            localStorage.setItem('joks_orders', JSON.stringify(orders));
-            loadAdminOrders();
-        }
-    </script>
-</body>
-        </html>
-        
+ 
