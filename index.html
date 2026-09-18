@@ -7,6 +7,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --primary-color: #00f2fe;
+            --secondary-color: #4facfe;
+            --bg-color: #0b0f19;
+            --card-bg: #131b2e;
+            --text-color: #ffffff;
+            --text-muted: #94a3b8;
+            --whatsapp-color: #25d366;
+        }
         * {
             box-sizing: border-box;
             margin: 0;
@@ -14,167 +23,193 @@
             font-family: 'Cairo', sans-serif;
         }
         body {
-            background-color: #0f172a;
-            color: #f8fafc;
-            padding-bottom: 40px;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            padding-bottom: 50px;
         }
-        header {
-            background: linear-gradient(135deg, #1e293b, #0f172a);
+        .hero {
+            background: linear-gradient(135deg, #1e1b4b, #0f172a);
             text-align: center;
-            padding: 30px 20px;
-            border-bottom: 2px solid #38bdf8;
+            padding: 40px 20px;
+            border-bottom: 2px solid rgba(0, 242, 254, 0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
-        header h1 {
-            font-size: 2.2rem;
-            color: #38bdf8;
+        .hero h1 {
+            font-size: 2.5rem;
             font-weight: 900;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             margin-bottom: 10px;
         }
-        header p {
-            color: #94a3b8;
+        .hero p {
+            color: var(--text-muted);
             font-size: 1rem;
         }
         .container {
-            max-width: 600px;
-            margin: 20px auto;
+            max-width: 650px;
+            margin: 25px auto;
             padding: 0 15px;
         }
         .section-title {
-            font-size: 1.3rem;
-            margin-bottom: 15px;
-            color: #e2e8f0;
-            border-right: 4px solid #38bdf8;
-            padding-right: 10px;
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
-        .game-card {
-            background: #1e293b;
-            border-radius: 12px;
-            padding: 15px 20px;
-            margin-bottom: 15px;
+        .section-title i {
+            color: var(--primary-color);
+        }
+        .store-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+        .item-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-            border: 1px solid #334155;
-            transition: 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
         }
-        .game-card:hover {
-            border-color: #38bdf8;
-            transform: translateY(-2px);
+        .item-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(0, 242, 254, 0.15);
         }
-        .game-info {
+        .item-info {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 18px;
         }
-        .game-info i {
-            font-size: 2rem;
-            color: #38bdf8;
+        .item-icon {
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, rgba(0, 242, 254, 0.1), rgba(79, 172, 254, 0.2));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: var(--primary-color);
         }
-        .game-name {
-            font-size: 1.1rem;
+        .item-details h3 {
+            font-size: 1.2rem;
             font-weight: 700;
-            color: #fff;
+            color: var(--text-color);
+            margin-bottom: 4px;
         }
-        .game-desc {
+        .item-details p {
             font-size: 0.85rem;
-            color: #94a3b8;
+            color: var(--text-muted);
         }
-        .buy-btn {
-            background-color: #25d366;
+        .action-btn {
+            background-color: var(--whatsapp-color);
             color: white;
             border: none;
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-weight: 600;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: 700;
             cursor: pointer;
             text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 5px;
-            font-size: 0.9rem;
+            gap: 8px;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            transition: 0.2s;
         }
-        .buy-btn:hover {
+        .action-btn:hover {
             background-color: #1ebe5d;
+            transform: scale(1.05);
         }
         footer {
             text-align: center;
-            margin-top: 40px;
-            color: #64748b;
-            font-size: 0.9rem;
+            margin-top: 50px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 20px;
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1><i class="fa-solid fa-gamepad"></i> Joks Store</h1>
-        <p>منصتك الأولى والأسرع لشحن رصيد الألعاب الرقمية بأمان تام</p>
-    </header>
+    <div class="hero">
+        <h1><i class="fa-solid fa-store"></i> Joks Store</h1>
+        <p>الوجهة الأولى والأضمن لشحن شدات وجواهر الألعاب الرقمية</p>
+    </div>
 
     <div class="container">
-        <h2 class="section-title">الألعاب المتوفرة للشحن</h2>
+        <h2 class="section-title"><i class="fa-solid fa-gamepad"></i> الأقسام المتاحة للشحن</h2>
 
-        <!-- Free Fire -->
-        <div class="game-card">
-            <div class="game-info">
-                <i class="fa-solid fa-fire text-orange"></i>
-                <div>
-                    <div class="game-name">Free Fire - فري فاير</div>
-                    <div class="game-desc">شحن جواهر فري فاير فوري</div>
+        <div class="store-grid">
+            <!-- Free Fire -->
+            <div class="item-card">
+                <div class="item-info">
+                    <div class="item-icon"><i class="fa-solid fa-fire"></i></div>
+                    <div class="item-details">
+                        <h3>Free Fire - فري فاير</h3>
+                        <p>شحن جواهر آمن وسريع بالـ ID</p>
+                    </div>
                 </div>
+                <a href="https://wa.me/201001477719?text=مرحباً، أريـد شحن جواهر فري فاير من Joks Store" class="action-btn" target="_blank">
+                    <i class="fa-brands fa-whatsapp"></i> طلب
+                </a>
             </div>
-            <a href="https://wa.me/201001477719?text=مرحباً، أريـد شحن جواهر فري فاير من Joks Store" class="buy-btn" target="_blank">
-                <i class="fa-brands fa-whatsapp"></i> اطلب الآن
-            </a>
-        </div>
 
-        <!-- PUBG Mobile -->
-        <div class="game-card">
-            <div class="game-info">
-                <i class="fa-solid fa-shield-halved"></i>
-                <div>
-                    <div class="game-name">PUBG Mobile - ببجي موبايل</div>
-                    <div class="game-desc">شحن شدات UC رسمية وآمنة</div>
+            <!-- PUBG Mobile -->
+            <div class="item-card">
+                <div class="item-info">
+                    <div class="item-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                    <div class="item-details">
+                        <h3>PUBG Mobile - ببجي موبايل</h3>
+                        <p>شحن شدات UC رسمية موثوقة</p>
+                    </div>
                 </div>
+                <a href="https://wa.me/201001477719?text=مرحباً، أريـد شحن شدات ببجي من Joks Store" class="action-btn" target="_blank">
+                    <i class="fa-brands fa-whatsapp"></i> طلب
+                </a>
             </div>
-            <a href="https://wa.me/201001477719?text=مرحباً، أريـد شحن شدات ببجي من Joks Store" class="buy-btn" target="_blank">
-                <i class="fa-brands fa-whatsapp"></i> اطلب الآن
-            </a>
-        </div>
 
-        <!-- FC Mobile -->
-        <div class="game-card">
-            <div class="game-info">
-                <i class="fa-solid fa-futbol"></i>
-                <div>
-                    <div class="game-name">FC Mobile - إف سي موبايل</div>
-                    <div class="game-desc">شحن نقاط ومميزات اللعبة</div>
+            <!-- FC Mobile -->
+            <div class="item-card">
+                <div class="item-info">
+                    <div class="item-icon"><i class="fa-solid fa-futbol"></i></div>
+                    <div class="item-details">
+                        <h3>FC Mobile - إف سي موبايل</h3>
+                        <p>شحن نقاط وأطقم اللعبة</p>
+                    </div>
                 </div>
+                <a href="https://wa.me/201001477719?text=مرحباً، أريـد شحن نقاط FC Mobile من Joks Store" class="action-btn" target="_blank">
+                    <i class="fa-brands fa-whatsapp"></i> طلب
+                </a>
             </div>
-            <a href="https://wa.me/201001477719?text=مرحباً، أريـد شحن نقاط FC Mobile من Joks Store" class="buy-btn" target="_blank">
-                <i class="fa-brands fa-whatsapp"></i> اطلب الآن
-            </a>
-        </div>
 
-        <!-- Call of Duty -->
-        <div class="game-card">
-            <div class="game-info">
-                <i class="fa-solid fa-bolt"></i>
-                <div>
-                    <div class="game-name">Call of Duty - كول آف ديوتي</div>
-                    <div class="game-desc">شحن كودز وباسات سريعة</div>
+            <!-- Call of Duty -->
+            <div class="item-card">
+                <div class="item-info">
+                    <div class="item-icon"><i class="fa-solid fa-bolt"></i></div>
+                    <div class="item-details">
+                        <h3>Call of Duty - كول آف ديوتي</h3>
+                        <p>شحن كودز وباسات مميزة</p>
+                    </div>
                 </div>
+                <a href="https://wa.me/201001477719?text=مرحباً، أريـد شحن كودز Call of Duty من Joks Store" class="action-btn" target="_blank">
+                    <i class="fa-brands fa-whatsapp"></i> طلب
+                </a>
             </div>
-            <a href="https://wa.me/201001477719?text=مرحباً، أريـد شحن كودز Call of Duty من Joks Store" class="buy-btn" target="_blank">
-                <i class="fa-brands fa-whatsapp"></i> اطلب الآن
-            </a>
         </div>
-
     </div>
 
     <footer>
-        <p>© 2026 Joks Store. جميع الحقوق محفوظة.</p>
+        <p>جميع الحقوق محفوظة © 2026 Joks Store</p>
     </footer>
 
 </body>
