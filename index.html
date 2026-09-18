@@ -488,7 +488,7 @@
         let currentSelectedPackage = "";
         let currentSelectedPrice = "";
 
-        // القوائم الشاملة بالأسعار والباقات المطلوبة بدقة
+        // باقات الألعاب كاملة
         const gamePackages = {
             "Free Fire": [
                 {name: "50 جوهرة", price: "25.00 جنيه"},
@@ -519,36 +519,41 @@
         };
 
         function scrollToGames() {
-            document.getElementById('games-section').scrollIntoView({behavior: 'smooth'});
+            let el = document.getElementById('games-section');
+            if(el) el.scrollIntoView({behavior: 'smooth'});
         }
 
         function openLoginModal() {
-            document.getElementById('login-modal').style.display = 'flex';
+            let modal = document.getElementById('login-modal');
+            if(modal) modal.style.display = 'flex';
         }
 
         function performLogin() {
-            let name = document.getElementById('login-name').value;
-            let phone = document.getElementById('login-phone').value;
-
-            if(!name || !phone) {
+            let nameInput = document.getElementById('login-name');
+            let phoneInput = document.getElementById('login-phone');
+            
+            if(!nameInput || !phoneInput || !nameInput.value.trim() || !phoneInput.value.trim()) {
                 alert("من فضلك اكتب الاسم ورقم الموبايل لتسجيل الدخول!");
                 return;
             }
 
             isLogedIn = true;
-            loggedUserName = name;
+            loggedUserName = nameInput.value.trim();
             
-            document.getElementById('auth-btn').style.display = 'none';
+            let authBtn = document.getElementById('auth-btn');
+            if(authBtn) authBtn.style.display = 'none';
+
             let statusText = document.getElementById('user-status-text');
-            statusText.style.display = 'inline-block';
-            statusText.innerHTML = `مرحباً، ${name} ✓`;
+            if(statusText) {
+                statusText.style.display = 'inline-block';
+                statusText.innerHTML = `مرحباً، ${loggedUserName} ✓`;
+            }
 
             closeModal('login-modal');
             alert("تم تسجيل الدخول بنجاح! يمكنك الآن اختيار الباقات وشحن ألعابك.");
         }
 
         function openPackages(gameName) {
-            // التحقق من تسجيل الدخول أولاً
             if(!isLogedIn) {
                 alert("عذراً، يجب تسجيل الدخول أولاً لتتمكن من عرض الباقات والشحن!");
                 openLoginModal();
@@ -556,20 +561,18 @@
             }
 
             currentSelectedGame = gameName;
-            document.getElementById('modal-game-title').innerText = "باقات " + gameName;
+            let titleEl = document.getElementById('modal-game-title');
+            if(titleEl) titleEl.innerText = "باقات " + gameName;
+            
             let listDiv = document.getElementById('packages-list');
+            if(!listDiv) return;
+            
             listDiv.innerHTML = "";
             
-            gamePackages[gameName].forEach(pkg => {
-                listDiv.innerHTML += `
-                    <div class="package-item">
-                        <div>
-                            <div style="font-weight:700; font-size:14px;">${pkg.name}</div>
-                            <div style="color:#ff1e1e; font-size:13px; font-weight:bold; margin-top:2px;">${pkg.price}</div>
-                        </div>
-                        <button class="login-btn" onclick="selectPackage('${pkg.name}', '${pkg.price}')">اختيار</button>
-                    </div>
-                `;
-            });
-            document.getElementById('packages-modal').style.display = 'flex';
- 
+            if(gamePackages[gameName]) {
+                gamePackages[gameName].forEach(pkg => {
+                    listDiv.innerHTML += `
+                        <div class="package-item">
+                            <div>
+                                <div style="font-weight:700; font-size:14px;">${pkg.name}</div>
+                                <div style="colo
