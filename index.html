@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Joks Store | تسجيل الدخول</title>
+    <title>Joks Store | شحن الألعاب الاحترافي</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -11,6 +11,7 @@
             --primary-red: #ff0033;
             --neon-glow: 0 0 25px rgba(255, 0, 51, 0.4);
             --border-color: rgba(255, 0, 51, 0.3);
+            --bg-card: linear-gradient(135deg, #120303 0%, #1c0606 100%);
         }
 
         * {
@@ -25,142 +26,16 @@
             color: #fff;
             min-height: 100vh;
             overflow-x: hidden;
-        }
-
-        /* خلفية متحركة فخمة */
-        .animated-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: linear-gradient(125deg, #050101, #1a0205, #0a0103);
-            background-size: 400% 400%;
-            animation: gradientBG 12s ease infinite;
-        }
-
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* شاشة تسجيل الدخول */
-        #login-section {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .login-card {
-            background: rgba(12, 2, 3, 0.85);
-            backdrop-filter: blur(12px);
-            border: 2px solid var(--border-color);
-            padding: 40px 30px;
-            border-radius: 25px;
-            width: 100%;
-            max-width: 420px;
-            text-align: center;
-            box-shadow: 0 0 40px rgba(255, 0, 51, 0.25);
-            animation: fadeIn 0.6s ease;
-        }
-
-        .crown-icon {
-            font-size: 3rem;
-            color: var(--primary-red);
-            margin-bottom: 10px;
-            text-shadow: var(--neon-glow);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-
-        .login-card h2 {
-            font-size: 2rem;
-            font-weight: 900;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-        }
-
-        .login-card h2 span {
-            color: var(--primary-red);
-        }
-
-        .login-card p {
-            color: #aaa;
-            font-size: 0.95rem;
-            margin-bottom: 25px;
-        }
-
-        .input-group {
-            position: relative;
-            margin-bottom: 18px;
-        }
-
-        .input-group i {
-            position: absolute;
-            right: 18px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--primary-red);
-        }
-
-        .login-card input {
-            width: 100%;
-            padding: 14px 45px 14px 18px;
-            background: rgba(0, 0, 0, 0.6);
-            border: 1px solid var(--border-color);
-            border-radius: 14px;
-            color: #fff;
-            font-size: 1rem;
-            outline: none;
-            transition: 0.3s;
-        }
-
-        .login-card input:focus {
-            border-color: var(--primary-red);
-            box-shadow: 0 0 15px rgba(255, 0, 51, 0.3);
-        }
-
-        .main-btn {
-            background: linear-gradient(135deg, #cc0000, #ff1a40);
-            color: white;
-            border: none;
-            padding: 14px;
-            width: 100%;
-            border-radius: 14px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            cursor: pointer;
-            box-shadow: 0 5px 20px rgba(255,0,51,0.4);
-            transition: 0.3s;
-            margin-top: 10px;
-        }
-
-        .main-btn:hover {
-            transform: translateY(-2px);
-            background: linear-gradient(135deg, #e60000, #ff3355);
-            box-shadow: 0 8px 25px rgba(255,0,51,0.6);
-        }
-
-        /* المتجر الرئيسي (يظهر بعد تسجيل الدخول) */
-        #store-section {
-            display: none;
-            padding-bottom: 50px;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255, 0, 51, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(150, 0, 20, 0.08) 0%, transparent 40%);
         }
 
         header {
             background: rgba(10, 2, 3, 0.9);
             backdrop-filter: blur(10px);
             text-align: center;
-            padding: 30px 20px;
+            padding: 35px 20px;
             border-bottom: 2px solid var(--border-color);
             position: relative;
         }
@@ -194,6 +69,7 @@
 
         .support-banner strong {
             color: #fff;
+            letter-spacing: 1px;
         }
 
         .container {
@@ -215,7 +91,7 @@
         }
 
         .game-card {
-            background: linear-gradient(135deg, #120303 0%, #1c0606 100%);
+            background: var(--bg-card);
             border-radius: 16px;
             padding: 18px 22px;
             margin-bottom: 16px;
@@ -293,22 +169,29 @@
             font-weight: 800;
         }
 
-        .select-btn {
+        .select-btn, .main-btn {
             background: linear-gradient(135deg, #cc0000, #ff1a40);
             color: white;
             border: none;
-            padding: 8px 16px;
-            border-radius: 8px;
+            padding: 10px 18px;
+            border-radius: 10px;
             cursor: pointer;
             font-weight: 700;
             transition: 0.2s;
+            box-shadow: 0 4px 15px rgba(255,0,51,0.3);
         }
 
-        .select-btn:hover {
+        .select-btn {
+            padding: 8px 16px;
+            border-radius: 8px;
+        }
+
+        .select-btn:hover, .main-btn:hover {
             transform: scale(1.05);
+            background: linear-gradient(135deg, #e60000, #ff3355);
         }
 
-        /* نافذة الطلب */
+        /* نافذة الطلب مع رقم الهاتف الإجباري */
         #order-modal {
             display: none;
             position: fixed;
@@ -323,9 +206,9 @@
         }
 
         .order-content {
-            background: #120303;
+            background: var(--bg-card);
             border: 2px solid var(--primary-red);
-            padding: 30px 20px;
+            padding: 30px 22px;
             border-radius: 20px;
             width: 100%;
             max-width: 400px;
@@ -335,13 +218,42 @@
 
         .order-content input {
             width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
+            padding: 13px;
+            margin-bottom: 14px;
             background: rgba(0,0,0,0.7);
             border: 1px solid var(--border-color);
             border-radius: 10px;
             color: white;
             text-align: center;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .order-content input:focus {
+            border-color: var(--primary-red);
+        }
+
+        .main-btn {
+            width: 100%;
+            padding: 12px;
+            font-size: 1.05rem;
+        }
+
+        .close-btn {
+            background: transparent;
+            color: #888;
+            border: none;
+            padding: 8px;
+            width: 100%;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 8px;
+            font-weight: 600;
+        }
+
+        .close-btn:hover {
+            color: #fff;
+            background: rgba(255,255,255,0.05);
         }
 
         /* زر لوحة الإدارة السري */
@@ -383,171 +295,121 @@
         .order-box-admin {
             background: #120303;
             border: 1px solid var(--border-color);
-            padding: 15px;
+            padding: 16px;
             border-radius: 12px;
             margin-bottom: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-
-        .close-btn {
-            background: #333;
-            color: #fff;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
-        }
     </style>
 </head>
 <body>
 
-    <div class="animated-bg"></div>
+    <header>
+        <h1>JOKS <span>STORE</span></h1>
+        <p>الوجهة الأولى لشحن الألعاب بأمان وسرعة فائقة</p>
+    </header>
 
-    <!-- شاشة تسجيل الدخول -->
-    <div id="login-section">
-        <div class="login-card">
-            <i class="fa-solid fa-crown crown-icon"></i>
-            <h2>JOKS <span>STORE</span></h2>
-            <p>سجل بياناتك لاستعراض أسعار وخدمات الشحن الفوري</p>
-            
-            <div class="input-group">
-                <i class="fa-solid fa-phone"></i>
-                <input type="text" id="login-phone" placeholder="رقم الموبايل">
-            </div>
-            
-            <div class="input-group">
-                <i class="fa-solid fa-envelope"></i>
-                <input type="email" id="login-email" placeholder="البريد الإلكتروني">
-            </div>
-
-            <button class="main-btn" onclick="handleLogin()">دخول للمتجر</button>
-        </div>
+    <div class="support-banner">
+        <i class="fa-solid fa-headset" style="color: var(--primary-red);"></i> للاستفسارات تواصل معنا عبر واتساب: <strong>01001477719</strong>
     </div>
 
-    <!-- المتجر الرئيسي -->
-    <div id="store-section">
-        <header>
-            <h1>JOKS <span>STORE</span></h1>
-            <p>الوجهة الأولى لشحن الألعاب بأمان وسرعة فائقة</p>
-        </header>
+    <div class="container">
+        <h2 class="section-title"><i class="fa-solid fa-gamepad"></i> الألعاب المتاحة للشحن</h2>
 
-        <div class="support-banner">
-            <i class="fa-solid fa-headset" style="color: var(--primary-red);"></i> للاستفسارات وخدمة العملاء تواصل معنا عبر واتساب: <strong>01001477719</strong>
-        </div>
-
-        <div class="container">
-            <h2 class="section-title"><i class="fa-solid fa-gamepad"></i> الألعاب المتاحة للشحن</h2>
-
-            <!-- Free Fire -->
-            <div class="game-card" onclick="togglePrices('ff-prices')">
-                <div class="game-header">
-                    <div class="game-info">
-                        <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=120&h=120&fit=crop" class="game-img" alt="Free Fire">
-                        <div>
-                            <div class="game-name">Free Fire - فري فاير</div>
-                            <div class="game-desc">شحن جواهر رسمي برقم الـ ID</div>
-                        </div>
+        <!-- Free Fire -->
+        <div class="game-card" onclick="togglePrices('ff-prices')">
+            <div class="game-header">
+                <div class="game-info">
+                    <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=120&h=120&fit=crop" class="game-img" alt="Free Fire">
+                    <div>
+                        <div class="game-name">Free Fire - فري فاير</div>
+                        <div class="game-desc">شحن جواهر رسمي برقم الـ ID</div>
                     </div>
-                    <i class="fa-solid fa-chevron-down chevron-icon"></i>
                 </div>
-                <div id="ff-prices" class="price-list" onclick="event.stopPropagation()">
-                    <div class="price-item">
-                        <div>
-                            <div class="package-name">100 جوهرة</div>
-                            <div class="package-price">50 جنيه</div>
-                        </div>
-                        <button class="select-btn" onclick="openOrder('Free Fire - 100 جوهرة')">شراء</button>
+                <i class="fa-solid fa-chevron-down chevron-icon"></i>
+            </div>
+            <div id="ff-prices" class="price-list" onclick="event.stopPropagation()">
+                <div class="price-item">
+                    <div>
+                        <div class="package-name">100 جوهرة</div>
+                        <div class="package-price">50 جنيه</div>
                     </div>
-                    <div class="price-item">
-                        <div>
-                            <div class="package-name">310 جوهرة</div>
-                            <div class="package-price">150 جنيه</div>
-                        </div>
-                        <button class="select-btn" onclick="openOrder('Free Fire - 310 جوهرة')">شراء</button>
+                    <button class="select-btn" onclick="openOrder('Free Fire - 100 جوهرة')">شراء</button>
+                </div>
+                <div class="price-item">
+                    <div>
+                        <div class="package-name">310 جوهرة</div>
+                        <div class="package-price">150 جنيه</div>
                     </div>
+                    <button class="select-btn" onclick="openOrder('Free Fire - 310 جوهرة')">شراء</button>
                 </div>
             </div>
+        </div>
 
-            <!-- PUBG Mobile -->
-            <div class="game-card" onclick="togglePrices('pubg-prices')">
-                <div class="game-header">
-                    <div class="game-info">
-                        <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=120&h=120&fit=crop" class="game-img" alt="PUBG">
-                        <div>
-                            <div class="game-name">PUBG Mobile - ببجي موبايل</div>
-                            <div class="game-desc">شدات UC أصلية ومضمونة</div>
-                        </div>
+        <!-- PUBG Mobile -->
+        <div class="game-card" onclick="togglePrices('pubg-prices')">
+            <div class="game-header">
+                <div class="game-info">
+                    <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=120&h=120&fit=crop" class="game-img" alt="PUBG">
+                    <div>
+                        <div class="game-name">PUBG Mobile - ببجي موبايل</div>
+                        <div class="game-desc">شدات UC أصلية ومضمونة</div>
                     </div>
-                    <i class="fa-solid fa-chevron-down chevron-icon"></i>
                 </div>
-                <div id="pubg-prices" class="price-list" onclick="event.stopPropagation()">
-                    <div class="price-item">
-                        <div>
-                            <div class="package-name">60 شدة (UC)</div>
-                            <div class="package-price">40 جنيه</div>
-                        </div>
-                        <button class="select-btn" onclick="openOrder('PUBG - 60 UC')">شراء</button>
+                <i class="fa-solid fa-chevron-down chevron-icon"></i>
+            </div>
+            <div id="pubg-prices" class="price-list" onclick="event.stopPropagation()">
+                <div class="price-item">
+                    <div>
+                        <div class="package-name">60 شدة (UC)</div>
+                        <div class="package-price">40 جنيه</div>
                     </div>
-                    <div class="price-item">
-                        <div>
-                            <div class="package-name">325 شدة (UC)</div>
-                            <div class="package-price">200 جنيه</div>
-                        </div>
-                        <button class="select-btn" onclick="openOrder('PUBG - 325 UC')">شراء</button>
+                    <button class="select-btn" onclick="openOrder('PUBG - 60 UC')">شراء</button>
+                </div>
+                <div class="price-item">
+                    <div>
+                        <div class="package-name">325 شدة (UC)</div>
+                        <div class="package-price">200 جنيه</div>
                     </div>
+                    <button class="select-btn" onclick="openOrder('PUBG - 325 UC')">شراء</button>
                 </div>
             </div>
-
         </div>
+
     </div>
 
-    <!-- نافذة الطلب للعميل -->
+    <!-- نافذة الطلب (الـ ID + رقم الموبايل إجباري) -->
     <div id="order-modal">
         <div class="order-content">
             <h3 style="margin-bottom: 5px;">إتمام الطلب</h3>
             <div id="modal-item-name" style="color: var(--primary-red); font-weight: 700; margin-bottom: 15px;"></div>
+            
             <input type="text" id="user-game-id" placeholder="أدخل الـ ID الخاص بك في اللعبة">
+            <input type="text" id="user-phone-num" placeholder="رقم الموبايل (إجباري)">
+            
             <button class="main-btn" onclick="submitOrder()">تأكيد وإرسال الطلب</button>
-            <button class="close-btn" onclick="closeOrder()" style="width: 100%; margin-top: 10px;">إلغاء</button>
+            <button class="close-btn" onclick="closeOrder()">إلغاء</button>
         </div>
     </div>
 
-    <!-- زر خفي للوصول للوحة الإدارة الخاصة بك -->
+    <!-- زر خفي للوصول لوحة الإدارة الخاصة بك -->
     <button class="admin-trigger" onclick="openAdminPanel()"><i class="fa-solid fa-lock"></i> الإدارة</button>
 
     <!-- لوحة التحكم (Admin Panel) -->
     <div id="admin-panel">
         <div class="admin-header">
             <h2><i class="fa-solid fa-user-shield"></i> لوحة إدارة الطلبات</h2>
-            <button class="close-btn" onclick="closeAdminPanel()">إغلاق</button>
+            <button class="select-btn" onclick="closeAdminPanel()">إغلاق</button>
         </div>
-        <p style="color: #aaa; margin-bottom: 15px;">هنا تشوف طلبات الزباين بالـ IDs وتبدأ تشحن لهم:</p>
+        <p style="color: #aaa; margin-bottom: 15px;">هنا تشوف طلبات الزباين بالـ IDs وأرقام هواتفهم عشان تبدأ تشحن لهم:</p>
         <div id="admin-orders-list">
             <!-- الطلبات بتظهر هنا تلقائياً -->
         </div>
     </div>
 
     <script>
-        function handleLogin() {
-            let phone = document.getElementById('login-phone').value;
-            let email = document.getElementById('login-email').value;
-
-            if(phone.trim() === "" || email.trim() === "") {
-                alert("من فضلك اكتب رقم الموبايل والبريد الإلكتروني!");
-                return;
-            }
-
-            document.getElementById('login-section').style.display = 'none';
-            document.getElementById('store-section').style.display = 'block';
-        }
-
         function togglePrices(id) {
             let element = document.getElementById(id);
             if(element.style.display === "block") {
@@ -570,11 +432,13 @@
             document.getElementById('order-modal').style.display = 'none';
         }
 
-        // حفظ الطلبات محلياً عشان تشوفها في لوحة الإدارة
+        // حفظ الطلبات محلياً مع رقم الهاتف والـ ID
         function submitOrder() {
             let gameId = document.getElementById('user-game-id').value;
-            if(gameId.trim() === "") {
-                alert("من فضلك اكتب الـ ID الخاص بك!");
+            let phoneNum = document.getElementById('user-phone-num').value;
+
+            if(gameId.trim() === "" || phoneNum.trim() === "") {
+                alert("من فضلك اكتب الـ ID ورقم الموبايل بشكل إجباري!");
                 return;
             }
 
@@ -582,6 +446,7 @@
             orders.push({
                 package: selectedPackage,
                 gameId: gameId,
+                phone: phoneNum,
                 date: new Date().toLocaleTimeString()
             });
             localStorage.setItem('joks_orders', JSON.stringify(orders));
@@ -589,11 +454,12 @@
             alert("تم إرسال طلبك بنجاح! سيتم التنفيذ قريباً.");
             closeOrder();
             document.getElementById('user-game-id').value = "";
+            document.getElementById('user-phone-num').value = "";
         }
 
         function openAdminPanel() {
             let password = prompt("أدخل كلمة مرور الإدارة:");
-            if(password === "1234") { // تقدر تغير الباسورد براحتك هنا
+            if(password === "1234") { // الباسورد الافتراضي وتقدر تغيره
                 document.getElementById('admin-panel').style.display = 'block';
                 loadAdminOrders();
             } else if(password !== null) {
@@ -619,5 +485,24 @@
                 html += `
                     <div class="order-box-admin">
                         <div>
-                            <div style="color: var(--primary-red); font-weight: 700;">${ord.package}</div>
-          
+                            <div style="color: var(--primary-red); font-weight: 700; font-size: 1.1rem;">${ord.package}</div>
+                            <div style="margin: 5px 0;">ID اللعبة: <strong style="color:#00ff66;">${ord.gameId}</strong></div>
+                            <div style="margin: 5px 0;">رقم الهاتف: <strong style="color:#3399ff;">${ord.phone}</strong></div>
+                            <div style="font-size: 0.8rem; color: #888;">الوقت: ${ord.date}</div>
+                        </div>
+                        <button class="select-btn" onclick="deleteOrder(${index})">تم الشحن ✓</button>
+                    </div>
+                `;
+            });
+            listDiv.innerHTML = html;
+        }
+
+        function deleteOrder(index) {
+            let orders = JSON.parse(localStorage.getItem('joks_orders')) || [];
+            orders.splice(index, 1);
+            localStorage.setItem('joks_orders', JSON.stringify(orders));
+            loadAdminOrders();
+        }
+    </script>
+</body>
+</html>
